@@ -1,4 +1,4 @@
-package ro.arnia.ridesharing.domain.model.repository;
+package ro.arnia.ridesharing.domain.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
