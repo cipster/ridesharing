@@ -1,0 +1,41 @@
+
+  <mat-card>
+    <mat-card-content>
+      <form >
+        <p>Please login to continue</p>
+
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="User" formControlName="userName" required>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width-input">
+          <input matInput  placeholder="First Name" formControlName="password" required>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width-input">
+          <input matInput  placeholder="Last Name" formControlName="password" required>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width-input">
+          <input matInput type = "email" placeholder="Email" formControlName="email" required>
+        </mat-form-field><br>
+
+        <mat-form-field class="full-width-input">
+          <input matInput  type = "number" placeholder="Phone" formControlName="phone" required>
+        </mat-form-field><br>
+
+        <button mat-raised-button color="primary">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+<div>
+  <input type="text" (keyup)="OnName($event)"><br>
+  <button (click)="getProfile()"  mat-raised-button color="primary">Get</button><br>
+  <button (click)="postProfile()"  mat-raised-button color="primary">Post</button>
+</div>
+
