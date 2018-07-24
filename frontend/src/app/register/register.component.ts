@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,7 @@ import {HttpClient} from "@angular/common/http";
 export class RegisterComponent implements OnInit {
 
   name : string = "";
+  //private headers: ({ "Access-Control-Allow-Origin": '*'; "Access-Control-Allow-Methods": 'GET, POST, OPTIONS, PUT, PATCH, DELETE'; "Access-Control-Allow-Headers": 'X-Requested-With,content-type'; "Access-Control-Allow-Credentials": true });
   constructor(private httpClient:HttpClient) {
 
   }
@@ -22,24 +24,28 @@ export class RegisterComponent implements OnInit {
 
   getProfile() {
     console.log(this.name);
-    this.httpClient.get("https://api.myjson.com/bins/1dxcc6").subscribe(
+    let headers= new Headers();
+
+    this.httpClient.get("http://localhost:8080/log?num1=5&num2=1").subscribe(
       (data:any []) => {
         console.log(data)
       }
     );
+
   }
 
   postProfile() {
 
     this.httpClient.post("https://api.myjson.com/bins/",   {
-      id : '2',
-      title:'Gigel'
-    }).subscribe(
+        id : '2',
+        title:'Gigel'
+    },
+      ).subscribe(
 
       (data:any []) => {
         console.log(data)
-      }
 
+      }
     );
   }
 }
