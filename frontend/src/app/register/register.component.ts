@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   getProfile() {
     console.log(this.name);
 
-    this.httpClient.get("http://localhost:8080/log?num1=5&num2=1").subscribe(
+    this.httpClient.get("http://localhost:8080/start").subscribe(
       (data:any []) => {
         console.log(data)
       }
@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
     this.httpClient.post("https://api.myjson.com/bins/",   {
         id : '2',
         title:'Gigel'
+
     },
       ).subscribe(
 
