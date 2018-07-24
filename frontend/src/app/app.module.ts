@@ -48,8 +48,6 @@ const appRoutes :Routes = [
     MatCardModule,
     MatFormFieldModule,
     HttpClientModule
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {RequestOptions} from "@angular/http";
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,6 @@ export class RegisterComponent implements OnInit {
 
   getProfile() {
     console.log(this.name);
-    let headers= new Headers();
 
     this.httpClient.get("http://localhost:8080/log?num1=5&num2=1").subscribe(
       (data:any []) => {
