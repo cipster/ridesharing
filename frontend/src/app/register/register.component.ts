@@ -8,7 +8,9 @@ import {RequestOptions} from "@angular/http";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+
+
+export class RegisterComponent implements OnInit{
 
   name : string = "";
   //private headers: ({ "Access-Control-Allow-Origin": '*'; "Access-Control-Allow-Methods": 'GET, POST, OPTIONS, PUT, PATCH, DELETE'; "Access-Control-Allow-Headers": 'X-Requested-With,content-type'; "Access-Control-Allow-Credentials": true });
@@ -34,15 +36,18 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  postProfile() {
+  /*
+    http://localhost:8080/persons/search/findByLastName?name=Paiu
 
-    this.httpClient.post("https://api.myjson.com/bins/",   {
-        id : '2',
-        title:'Gigel'
+  */
 
-    },
+ /* @CrossOrigin(origins = "http://localhost", maxAge = 3600)
+  */
+   
+    postProfile() {
+
+    this.httpClient.post("http://localhost:8080/start", {}
       ).subscribe(
-
       (data:any []) => {
         console.log(data)
 

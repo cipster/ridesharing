@@ -17,7 +17,7 @@ public class RideSharingApplication {
 				registry.addMapping("/**")
 						.allowedOrigins("http://localhost:4200")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
-						.allowedHeaders("header1", "header2") //What is this for?
+						.allowedHeaders("name", "header2") //What is this for?
 						.allowCredentials(true);
 			}
 		};
