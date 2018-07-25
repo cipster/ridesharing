@@ -1,17 +1,16 @@
 <div class="signin-content">
   <mat-card>
     <mat-card-content>
-      <form >
+
         <p>Please login to continue</p>
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="User" formControlName="userName" required>
+          <input matInput placeholder="User" (keyup)="setName($event)" required>
         </mat-form-field><br>
 
         <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <input matInput type="password" placeholder="Password" (keyup)="setPassword($event)" required>
         </mat-form-field><br>
-        <button mat-raised-button color="primary">Login</button>
-      </form>
+        <button (click)="postLogin()"  mat-raised-button color="primary">Post</button>
     </mat-card-content>
   </mat-card>
 </div>

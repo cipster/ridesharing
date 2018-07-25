@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {RequestOptions} from "@angular/http";
+
+
 
 @Component({
   selector: 'app-register',
@@ -12,46 +12,60 @@ import {RequestOptions} from "@angular/http";
 
 export class RegisterComponent implements OnInit{
 
-  name : string = "";
-  //private headers: ({ "Access-Control-Allow-Origin": '*'; "Access-Control-Allow-Methods": 'GET, POST, OPTIONS, PUT, PATCH, DELETE'; "Access-Control-Allow-Headers": 'X-Requested-With,content-type'; "Access-Control-Allow-Credentials": true });
+  user : string = "";
+  firstName: string = "";
+  lastName: string = "";
+  password: string = "";
+  email: string = "";
+  phone: string = "";
+
   constructor(private httpClient:HttpClient) {
 
-  }
-
-  OnName(event:any){
-    this.name = event.target.value;
   }
 
   ngOnInit() {
   }
 
-  getProfile() {
-    console.log(this.name);
-
-    this.httpClient.get("http://localhost:8080/start").subscribe(
-      (data:any []) => {
-        console.log(data)
-      }
-    );
-
+  setUser(event:any){
+    this.user = event.target.value;
   }
 
-  /*
-    http://localhost:8080/persons/search/findByLastName?name=Paiu
+  setFirstName(event:any){
+    this.firstName = event.target.value;
+  }
 
-  */
+  setLastName(event:any){
+    this.lastName = event.target.value;
+  }
 
- /* @CrossOrigin(origins = "http://localhost", maxAge = 3600)
-  */
-   
-    postProfile() {
+  setPassword(event:any){
+    this.password = event.target.value;
+  }
 
-    this.httpClient.post("http://localhost:8080/start", {}
-      ).subscribe(
+  setEmail(event:any){
+    this.email = event.target.value;
+  }
+
+  setPhone(event:any){
+    this.phone = event.target.value;
+  }
+
+  postRegister() {
+
+    this.httpClient.post("https://api.myjson.com/bins", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        user: this.user,
+        email: this.email,
+        password : this.password,
+        phone : this.phone,
+      }
+    ).subscribe(
       (data:any []) => {
         console.log(data)
 
       }
     );
   }
+
 }
