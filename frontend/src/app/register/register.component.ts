@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit{
 
   postRegister() {
 
-    this.httpClient.post("https://api.myjson.com/bins", {
+    this.httpClient.post("http://localhost:8080/registerServer", {
         firstName: this.firstName,
         lastName: this.lastName,
         user: this.user,
