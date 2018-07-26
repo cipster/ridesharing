@@ -39,7 +39,7 @@ public class RegisterController {
             return "{\"response\":\"" + "existUserName" + "\"}";
     }
 
-    boolean existUser() {
+    private boolean existUser() {
 
         this.listPerson = this.repo.findByUser(this.person.getuser());
 
