@@ -17,12 +17,14 @@ public class RegisterController {
         String lastName = jsonObj.getString("lastName");
         String password = jsonObj.getString("password");
         String phone = jsonObj.getString("phone");
+        String email = jsonObj.getString("email");
 
         return "{\"user\":\"" + user
                 + "\",\"password\":\"" + password
                 + "\",\"firstName\":\"" + firstName
                 + "\",\"lastName\":\"" + lastName
                 + "\",\"phone\":\"" + phone
+                + "\",\"email\":\"" + email
                 + "\"}";
     }
 

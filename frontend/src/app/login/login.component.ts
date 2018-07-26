@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -12,9 +11,7 @@ export class LoginComponent implements OnInit {
   name : string = "Ovidiu";
   password : string = "george";
 
-  constructor(private httpClient:HttpClient) {
-
-  }
+  constructor(private AuthService: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,19 +23,11 @@ export class LoginComponent implements OnInit {
   setPassword(event:any){
     this.password = event.target.value;
   }
-//http://localhost:8080/loginServer
-//https://api.myjson.com/bins
-  postLogin() {
 
-    this.httpClient.post("http://localhost:8080/loginServer", {
-        name: this.name,
-        password: this.password
-      }
-    ).subscribe(
-      (data:any []) => {
-        console.log(data)
-
-      }
+  postLogin(){
+    this.AuthService.postLogin(
+      this.name,
+      this.password,
     );
   }
 
