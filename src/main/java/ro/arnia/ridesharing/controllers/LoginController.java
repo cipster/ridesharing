@@ -33,6 +33,8 @@ public class LoginController {
         this.user = jsonObj.getString("user");
         this.password = jsonObj.getString("password");
 
+
+
         if(this.user==null || this.password==null)
             return "{\"id\":\""
                     + ""
@@ -55,6 +57,7 @@ public class LoginController {
 
         this.person = this.listPerson.get(0);
         String pass = person.getPassword();
+
         if(this.password.equals(pass) == true)
             return "{\"id\":\""
                     + this.person.getFirstName()
