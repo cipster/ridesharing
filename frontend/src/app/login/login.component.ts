@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-//http://localhost:8080/loginServer
-//https://api.myjson.com/bins
+import {AuthService} from "../services/auth.service";
 
 
 @Component({
@@ -14,7 +12,7 @@ export class LoginComponent implements OnInit {
   user : string = "";
   password : string = "";
 
-  constructor(private httpClient:HttpClient) {
+  constructor(private AuthService: AuthService) {
 
   }
 
@@ -29,17 +27,11 @@ export class LoginComponent implements OnInit {
     this.password = event.target.value;
   }
 
+  /** Creates a POST request to Spring server. */
   postLogin() {
-
-    this.httpClient.post("http://localhost:8080/loginServer", {
-        user: this.user,
-        password: this.password
-      }
-    ).subscribe(
-      (data:any []) => {
-        console.log(data)
-
-      }
+    this.AuthService.postLogin(
+      this.user,
+      this.password
     );
   }
 
