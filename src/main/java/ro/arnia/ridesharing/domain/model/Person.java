@@ -1,9 +1,9 @@
 package ro.arnia.ridesharing.domain.model;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.mongodb.core.mapping.Document;
 
+//@Document(collection="Persons")
 public class Person extends BaseEntity {
-
 
 
     private String firstName;

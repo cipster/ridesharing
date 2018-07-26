@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import {HttpClient} from "@angular/common/http";
+//http://localhost:8080/loginServer
+//https://api.myjson.com/bins
+
 
 @Component({
   selector: 'app-login',
@@ -26,8 +28,7 @@ export class LoginComponent implements OnInit {
   setPassword(event:any){
     this.password = event.target.value;
   }
-//http://localhost:8080/loginServer
-//https://api.myjson.com/bins
+
   postLogin() {
 
     this.httpClient.post("http://localhost:8080/loginServer", {
