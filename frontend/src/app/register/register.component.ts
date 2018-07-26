@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
 
 
 @Component({
@@ -18,7 +19,9 @@ export class RegisterComponent implements OnInit{
   email: string = "";
   phone: string = "";
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private httpClient:HttpClient) {
+
+  }
 
   ngOnInit() {
   }
@@ -47,14 +50,22 @@ export class RegisterComponent implements OnInit{
     this.phone = event.target.value;
   }
 
-  postRegister(){
-    this.AuthService.postRegister(
-      this.firstName,
-      this.lastName,
-      this.user,
-      this.email,
-      this.password,
-      this.phone,
+  postRegister() {
+
+    this.httpClient.post("http://localhost:8080/registerServer", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        user: this.user,
+        email: this.email,
+        password : this.password,
+        phone : this.phone,
+
+      }
+    ).subscribe(
+      (data:any []) => {
+        console.log(data)
+
+      }
     );
   }
 

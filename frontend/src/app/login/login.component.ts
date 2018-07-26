@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
+import {HttpClient} from "@angular/common/http";
+//http://localhost:8080/loginServer
+//https://api.myjson.com/bins
+
 
 @Component({
   selector: 'app-login',
@@ -8,26 +11,35 @@ import {AuthService} from "../services/auth.service";
 })
 export class LoginComponent implements OnInit {
 
-  name : string = "Ovidiu";
-  password : string = "george";
+  user : string = "";
+  password : string = "";
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private httpClient:HttpClient) {
+
+  }
 
   ngOnInit() {
   }
 
   setName(event:any){
-    this.name = event.target.value;
+    this.user = event.target.value;
   }
 
   setPassword(event:any){
     this.password = event.target.value;
   }
 
-  postLogin(){
-    this.AuthService.postLogin(
-      this.name,
-      this.password,
+  postLogin() {
+
+    this.httpClient.post("http://localhost:8080/loginServer", {
+        user: this.user,
+        password: this.password
+      }
+    ).subscribe(
+      (data:any []) => {
+        console.log(data)
+
+      }
     );
   }
 
