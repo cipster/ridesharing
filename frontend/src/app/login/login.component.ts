@@ -11,8 +11,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LoginComponent implements OnInit {
 
-  name : string = "Ovidiu";
-  password : string = "george";
+  user : string = "";
+  password : string = "";
 
   constructor(private httpClient:HttpClient) {
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   setName(event:any){
-    this.name = event.target.value;
+    this.user = event.target.value;
   }
 
   setPassword(event:any){
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   postLogin() {
 
     this.httpClient.post("http://localhost:8080/loginServer", {
-        name: this.name,
+        user: this.user,
         password: this.password
       }
     ).subscribe(

@@ -59,6 +59,7 @@ export class RegisterComponent implements OnInit{
         email: this.email,
         password : this.password,
         phone : this.phone,
+
       }
     ).subscribe(
       (data:any []) => {

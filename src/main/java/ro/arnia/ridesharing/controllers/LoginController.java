@@ -4,13 +4,12 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
 public class LoginController {
     private PersonRepository repo;
+    private String user ;
     private String name ;
     private String password;
     private JSONObject jsonObj;
@@ -19,6 +18,7 @@ public class LoginController {
 
     public LoginController(PersonRepository repository){
         this.repo = repository;
+        this.user = "";
         this.name = "";
         this.password = "";
         this.jsonObj = null;
@@ -30,20 +30,35 @@ public class LoginController {
     public String loginPost(@RequestBody String request) throws JSONException {
 
         jsonObj = new JSONObject(request);
-        this.name = jsonObj.getString("name");
+        this.user = jsonObj.getString("user");
         this.password = jsonObj.getString("password");
 
-        if(this.name==null || this.password==null)
+        if(this.user==null || this.password==null)
             return "{\"id\":\"" + "" + "\",\"title\":\"" + "" + "\"}";
 
+        this.listPerson = this.repo.findByUser(this.user);
 
-        this.listPerson = this.repo.findByLastName(name);
         if(listPerson.size()==0)
             return "{\"id\":\"" + "" + "\",\"title\":\"" + "" + "\"}";
 
         this.person = this.listPerson.get(0);
-
-        return "{\"id\":\"" + this.person.getFirstName() + "\",\"title\":\"" + password + "\"}";
+        String pass = person.getPassword();
+        if(this.password.equals(pass) == true)
+            return "{\"id\":\""
+                    + this.person.getFirstName()
+                    + "\",\"title\":\""
+                    + person.getPassword()
+                    + "\",\"response\":\""
+                    + "True"
+                    + "\"}";
+        else
+            return "{\"id\":\""
+                    + this.person.getFirstName()
+                    + "\",\"title\":\""
+                    + person.getPassword()
+                    + "\",\"response\":\""
+                    + "False"
+                    + "\"}";
     }
 
 
