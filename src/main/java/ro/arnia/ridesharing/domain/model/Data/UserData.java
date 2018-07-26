@@ -1,41 +1,17 @@
-package ro.arnia.ridesharing.domain.model;
+package ro.arnia.ridesharing.domain.model.Data;
 
-//import org.springframework.data.mongodb.core.mapping.Document;
+import ro.arnia.ridesharing.domain.model.BaseEntity;
 
-import lombok.Data;
+public class UserData extends BaseEntity {
 
-import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
-
-//@Document(collection="Persons")
-public class Person extends BaseEntity {
-
-    @NotNull(message = "Name cannot be null")
     private String user;
-
-    @NotNull(message = "Name cannot be null")
     private String firstName;
-
-    @NotNull(message = "Name cannot be null")
     private String lastName;
-
-    @NotNull(message = "Name cannot be null")
     private String password;
-
-    @NotNull(message = "Name cannot be null")
     private String phone;
-
-    @NotNull(message = "Name cannot be null")
     private String email;
-    public String role;
 
-    public String getRole() {
-        return this.role;
-    }
 
-    public void setRole(String role) {
-        this.role=role;
-    }
 
     public String getFirstName() {
 
@@ -98,5 +74,6 @@ public class Person extends BaseEntity {
 
         this.email = email;
     }
+
 
 }
