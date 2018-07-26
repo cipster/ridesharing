@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
-
+import { AuthService } from "../services/auth.service";
+import { UserRegistrationData } from "../interfaces/user-registration-data";
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,9 @@ import {AuthService} from "../services/auth.service";
 })
 export class LoginComponent implements OnInit {
 
-  user : string = "";
+  username : string = "";
   password : string = "";
+  userRegistrationData: UserRegistrationData;
 
   constructor(private AuthService: AuthService) {
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   setName(event:any){
-    this.user = event.target.value;
+    this.username = event.target.value;
   }
 
   setPassword(event:any){
@@ -29,10 +30,12 @@ export class LoginComponent implements OnInit {
 
   /** Creates a POST request to Spring server. */
   postLogin() {
-    this.AuthService.postLogin(
-      this.user,
-      this.password
-    );
+    this.userRegistrationData = {
+      username: this.username,
+      password: this.password,
+    }
+
+    this.AuthService.postLogin(this.userRegistrationData);
   }
 
 }

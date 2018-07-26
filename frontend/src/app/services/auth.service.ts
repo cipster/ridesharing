@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { UserRegistrationData } from "../interfaces/user-registration-data";
 
 @Injectable({
   providedIn: 'root'
@@ -20,26 +21,23 @@ export class AuthService {
    * @param {string} password
    * @param {string} phone
    */
-  postRegister(firstName: string,
-               lastName: string,
-               user: string,
-               email: string,
-               password: string,
-               phone: string,
-  ) {
+  postRegister(userRegistrationData: UserRegistrationData) {
 
     this.httpClient.post("http://localhost:8080/registerServer", {
-        firstName: firstName,
-        lastName: lastName,
-        user: user,
-        email: email,
-        password : password,
-        phone : phone
+        firstName: userRegistrationData.firstName,
+        lastName: userRegistrationData.lastName,
+        username: userRegistrationData.username,
+        email: userRegistrationData.email,
+        password : userRegistrationData.password,
+        phone : userRegistrationData.phone,
       }
     ).subscribe(
       (data:any []) => {
         console.log(data)
       }
+      /**
+       * TODO: In caz de eroare catch, afisare eroare
+       */
     );
 
   }
@@ -50,17 +48,20 @@ export class AuthService {
    * @param {string} user
    * @param {string} password
    */
-  postLogin(user: string,
-            password: string,) {
+  postLogin(userRegistrationData: UserRegistrationData) {
     this.httpClient.post("http://localhost:8080/loginServer", {
-        user: user,
-        password: password
+        username: userRegistrationData.username,
+        password: userRegistrationData.password,
       }
     ).subscribe(
       (data:any []) => {
         console.log(data)
       }
     );
+
+    /**
+     * TODO: In caz de eroare catch, afisare eroare
+     */
   }
 
 }

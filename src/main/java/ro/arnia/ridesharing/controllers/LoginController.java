@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 public class LoginController {
     private PersonRepository repo;
-    private String user ;
+    private String username ;
     private String name ;
     private String password;
     private JSONObject jsonObj;
@@ -18,7 +18,7 @@ public class LoginController {
 
     public LoginController(PersonRepository repository){
         this.repo = repository;
-        this.user = "";
+        this.username = "";
         this.name = "";
         this.password = "";
         this.jsonObj = null;
@@ -30,10 +30,10 @@ public class LoginController {
     public String loginPost(@RequestBody String request) throws JSONException {
 
         jsonObj = new JSONObject(request);
-        this.user = jsonObj.getString("user");
+        this.username = jsonObj.getString("username");
         this.password = jsonObj.getString("password");
 
-        if(this.user==null || this.password==null)
+        if(this.username==null || this.password==null)
             return "{\"id\":\""
                     + ""
                     + "\",\"title\":\""
@@ -42,7 +42,7 @@ public class LoginController {
                     + "False"
                     + "\"}";
 
-        this.listPerson = this.repo.findByUser(this.user);
+        this.listPerson = this.repo.findByUser(this.username);
 
         if(listPerson.size()==0)
             return "{\"id\":\""
