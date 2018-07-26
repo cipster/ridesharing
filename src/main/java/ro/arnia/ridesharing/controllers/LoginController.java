@@ -34,12 +34,24 @@ public class LoginController {
         this.password = jsonObj.getString("password");
 
         if(this.user==null || this.password==null)
-            return "{\"id\":\"" + "" + "\",\"title\":\"" + "" + "\"}";
+            return "{\"id\":\""
+                    + ""
+                    + "\",\"title\":\""
+                    + ""
+                    + "\",\"response\":\""
+                    + "False"
+                    + "\"}";
 
         this.listPerson = this.repo.findByUser(this.user);
 
         if(listPerson.size()==0)
-            return "{\"id\":\"" + "" + "\",\"title\":\"" + "" + "\"}";
+            return "{\"id\":\""
+                    + ""
+                    + "\",\"title\":\""
+                    + ""
+                    + "\",\"response\":\""
+                    + "False"
+                    + "\"}";
 
         this.person = this.listPerson.get(0);
         String pass = person.getPassword();
