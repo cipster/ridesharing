@@ -2,8 +2,6 @@ package ro.arnia.ridesharing.domain.model;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-
 //@Document(collection="Persons")
 public class Person extends BaseEntity {
 
@@ -13,9 +11,15 @@ public class Person extends BaseEntity {
     private String password;
     private String phone;
     private String email;
+    public String role;
 
+    public String getRole() {
+        return this.role;
+    }
 
-
+    public void setRole(String role) {
+        this.role=role;
+    }
 
     public String getFirstName() {
 
