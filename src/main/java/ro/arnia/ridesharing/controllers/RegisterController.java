@@ -1,6 +1,8 @@
 package ro.arnia.ridesharing.controllers;
 
 import org.json.JSONException;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,11 +29,18 @@ public class RegisterController {
     }
 
     @RequestMapping(value="/registerServer", method=RequestMethod.POST)
-    public String registerPost(@RequestBody Person personData) throws JSONException {
+    public String registerPost (@Valid  @RequestBody Person personData, Errors errors) throws JSONException {
+        List<ObjectError> listErrors = errors.getAllErrors();
+
+        if(listErrors.size() != 0){
+
+
+        }
+
 
          this.person = personData;
 
-         if(existUser()==false) {
+         if(!existUser()) {
              this.repo.save(person);
              return "{\"user\":\"" + this.person.getuser()
                      + "\",\"resonse\":\"" + "OK"
