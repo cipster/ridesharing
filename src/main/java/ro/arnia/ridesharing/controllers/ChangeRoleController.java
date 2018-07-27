@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ro.arnia.ridesharing.domain.model.Data.ChangeRoleData;
 import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
@@ -34,14 +35,11 @@ public class ChangeRoleController {
     }
 
     @RequestMapping(value = "changeRole", method = RequestMethod.POST)
-    public String changeRole(@RequestBody String request) throws JSONException {
+    public String changeRole(@RequestBody ChangeRoleData request) throws JSONException {
 
-        jsonObj = new JSONObject(request);
-        this.user = jsonObj.getString("user");
-        this.role = jsonObj.getString("role");
-        this.listperson = repository.findByUser(user);
+        this.listperson = repository.findByUser(request.user);
         this.person = this.listperson.get(0);
-        person.setRole(role);
+        person.setRole(request.role);
         repository.save(person);
         return "{\"id\":\""
                 + ""
