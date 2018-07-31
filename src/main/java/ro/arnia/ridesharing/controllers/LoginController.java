@@ -30,10 +30,8 @@ public class LoginController {
     public String loginPost(@RequestBody String request) throws JSONException {
 
         jsonObj = new JSONObject(request);
-        this.user = jsonObj.getString("user");
+        this.user = jsonObj.getString("username");
         this.password = jsonObj.getString("password");
-
-
 
         if(this.user==null || this.password==null)
             return "{\"id\":\""
@@ -44,7 +42,7 @@ public class LoginController {
                     + "False"
                     + "\"}";
 
-        this.listPerson = this.repo.findByUser(this.user);
+        this.listPerson = this.repo.findByUserName(this.user);
 
         if(listPerson.size()==0)
             return "{\"id\":\""

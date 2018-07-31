@@ -11,7 +11,6 @@ import ro.arnia.ridesharing.domain.model.Person;
 @RepositoryRestResource
 public interface PersonRepository extends MongoRepository<Person, String> {
 
-    List<Person> findByLastName(@Param("name") String name);
-    List<Person> findByUser(@Param("user") String user);
+    List<Person> findByUserName(@Param("userName") String userName);
 
 }

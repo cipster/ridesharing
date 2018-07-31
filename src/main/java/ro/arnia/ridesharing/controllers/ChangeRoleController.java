@@ -35,18 +35,7 @@ public class ChangeRoleController {
     }
 
     @RequestMapping(value = "changeRole", method = RequestMethod.POST)
-    public String changeRole(@RequestBody ChangeRoleData request) throws JSONException {
+    public void changeRole(@RequestBody ChangeRoleData request) throws JSONException {
 
-        this.listperson = repository.findByUser(request.user);
-        this.person = this.listperson.get(0);
-        person.setRole(request.role);
-        repository.save(person);
-        return "{\"id\":\""
-                + ""
-                + "\",\"title\":\""
-                + ""
-                + "\",\"response\":\""
-                + "False"
-                + "\"}";
     }
 }

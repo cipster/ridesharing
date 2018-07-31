@@ -6,36 +6,39 @@ import lombok.Data;
 
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 //@Document(collection="Persons")
 public class Person extends BaseEntity {
 
-    @NotNull(message = "Name cannot be null")
-    private String user;
+    enum typeUser
+    {
+        DRIVER, PASSENGER;
+    }
 
-    @NotNull(message = "Name cannot be null")
+    private String userName;
     private String firstName;
-
-    @NotNull(message = "Name cannot be null")
     private String lastName;
-
-    @NotNull(message = "Name cannot be null")
     private String password;
-
-    @NotNull(message = "Name cannot be null")
     private String phone;
-
-    @NotNull(message = "Name cannot be null")
     private String email;
-    public String role;
+    private typeUser type;
+    private Set<Rating> ratings;
+    private Set<Car> ownedCars;
+    private Set<Ride> rideHistory;
 
-    public String getRole() {
-        return this.role;
+    public void addCar() {
+
     }
 
-    public void setRole(String role) {
-        this.role=role;
+    public void removeCar() {
+
     }
+
+    public void modifyCar() {
+
+    }
+
 
     public String getFirstName() {
 
@@ -58,14 +61,14 @@ public class Person extends BaseEntity {
     }
 
 
-    public String getuser() {
+    public String getuserName() {
 
-        return this.user;
+        return this.userName;
     }
 
     public void setuser(String user) {
 
-        this.user = user;
+        this.userName = user;
     }
 
 
@@ -98,5 +101,9 @@ public class Person extends BaseEntity {
 
         this.email = email;
     }
+
+
+
+
 
 }
