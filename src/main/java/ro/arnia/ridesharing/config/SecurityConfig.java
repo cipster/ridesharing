@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +15,7 @@ import ro.arnia.ridesharing.service.CustomUserDetailsService;
 
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -39,16 +41,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .successHandler(authenticationSuccessHandler())
                 .failureHandler(authenticationFailureHandler())
+                //.failureUrl("/login.html?error=true")
                 .and()
                 .logout()
                 .permitAll();
     }
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(getPasswordEncoder());
+//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(getPasswordEncoder());
+        auth.inMemoryAuthentication()
+                .withUser("user")
+                .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
+                .roles("USER")
+                .and()
+              .withUser("manager")
+               .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
+               .authorities("WRITE_PRIVILEGES", "READ_PRIVILEGES")
+               .roles("MANAGER");
     }
 
     @Bean
