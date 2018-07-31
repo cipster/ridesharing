@@ -1,0 +1,19 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+</agm-map>
+
+<div class="fab-wrapper">
+  <button mat-fab class="fab-position" color="default" [matMenuTriggerFor]="appMenu">
+    <mat-icon aria-label="Example icon-button with a heart icon" class="center">menu</mat-icon>
+  </button>
+</div>
+
+<mat-menu #appMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+  <ng-template matMenuContent>
+    <button mat-menu-item>Manage Cars</button>
+    <button mat-menu-item>Trips</button>
+    <button mat-menu-item>Back to current trip</button>
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item>Change Role</button>
+    <button mat-menu-item>Logout</button>
+  </ng-template>
+</mat-menu>

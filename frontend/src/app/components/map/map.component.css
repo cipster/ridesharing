@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+agm-map {
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0px !important;
+  padding: 0px !important;
+  z-index: -1;
+}
+
+.fab-wrapper {
+  width: 90%;
+  height: 20vh;
+  display: flex;
+  position: absolute;
+  flex-direction: row-reverse;
+  align-items: center;
+}
