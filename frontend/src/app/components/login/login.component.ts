@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.userRegistrationData = {
       username: this.username,
       password: this.password,
-    }
+    };
 
     this.AuthService.postLogin(this.userRegistrationData);
   }

@@ -11,6 +11,46 @@ public class Ride {
     private List<Location> stops;
     private Date date;
 
+    public Set<Person> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Set<Person> passengers) {
+        this.passengers = passengers;
+    }
+
+    public Location getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(Location startPoint) {
+        this.startPoint = startPoint;
+    }
+
+    public Location getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(Location endPoint) {
+        this.endPoint = endPoint;
+    }
+
+    public List<Location> getStops() {
+        return stops;
+    }
+
+    public void setStops(List<Location> stops) {
+        this.stops = stops;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Ride start() {
 
         Ride r =  new Ride();

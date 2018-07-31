@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { UserRegistrationData } from "../interfaces/user-registration-data";
+import { CarRegistrationData } from "../interfaces/car-registration-data";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { UserRegistrationData } from "../interfaces/user-registration-data";
 
 /** Service with Authentication methods. */
 export class AuthService {
+
 
   constructor(private httpClient:HttpClient) { }
 
@@ -23,7 +25,7 @@ export class AuthService {
    */
   postRegister(userRegistrationData: UserRegistrationData) {
 
-    this.httpClient.post("http://localhost:8080/registerServer", {
+    this.httpClient.post("http://localhost:8080/persons", {
         firstName: userRegistrationData.firstName,
         lastName: userRegistrationData.lastName,
         user: userRegistrationData.username,
@@ -40,6 +42,39 @@ export class AuthService {
        */
     );
 
+  }
+
+  /**
+   * Represents a function which creates a POST request to
+   * Spring server with following parameters, it triggers when a car register.
+   * @param {string} brand
+   * @param {string} model
+   * @param {string} licensePlate
+   * @param {number} year
+   * @param {number} available
+   *
+   */
+
+  postAddCar(carRegistrationData: CarRegistrationData) {
+    console.log("DO");
+
+    this.httpClient.post("http://localhost:8080/cars", {
+        brand: carRegistrationData.brand,
+        model: carRegistrationData.model,
+        licensePlate: carRegistrationData.licensePlate,
+        year: carRegistrationData.year,
+        available: carRegistrationData.available,
+
+      }
+    ).subscribe(
+      (data:any []) => {
+        console.log(data)
+      }
+    );
+
+    /**
+     * TODO: In caz de eroare catch, afisare eroare
+     */
   }
 
   /**
@@ -63,5 +98,6 @@ export class AuthService {
      * TODO: In caz de eroare catch, afisare eroare
      */
   }
+
 
 }

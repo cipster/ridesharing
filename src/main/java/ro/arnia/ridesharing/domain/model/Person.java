@@ -27,6 +27,48 @@ public class Person extends BaseEntity {
     private Set<Car> ownedCars;
     private Set<Ride> rideHistory;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public typeUser getType() {
+        return type;
+    }
+
+    public void setType(typeUser type) {
+        this.type = type;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public Set<Car> getOwnedCars() {
+        return ownedCars;
+    }
+
+    public void setOwnedCars(Set<Car> ownedCars) {
+        this.ownedCars = ownedCars;
+    }
+
+    public Set<Ride> getRideHistory() {
+        return rideHistory;
+    }
+
+    public void setRideHistory(Set<Ride> rideHistory) {
+        this.rideHistory = rideHistory;
+    }
+
+
+
     public void addCar() {
 
     }
