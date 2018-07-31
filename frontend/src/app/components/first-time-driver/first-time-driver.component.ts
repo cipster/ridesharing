@@ -11,8 +11,32 @@ import {a} from "@angular/core/src/render3";
 })
 export class FirstTimeDriverComponent implements OnInit {
 
-  private carRegistrationData: CarRegistrationData;
+  private brand:String;
+  private model:String;
+  private licensePlate:String;
+  private year:number;
+  private available:number;
 
+
+  setBrand(event:any){
+    this.brand= event.target.value;
+  }
+
+  setModel(event:any){
+    this.model = event.target.value;
+  }
+
+  setLicensePlate(event:any){
+    this.licensePlate = event.target.value;
+  }
+
+  setYear(event:any){
+    this.year = event.target.value;
+  }
+
+  setAvailableSeats(event:any){
+    this.available = event.target.value;
+  }
 
   constructor(private auth:AuthService) { }
 
@@ -20,13 +44,12 @@ export class FirstTimeDriverComponent implements OnInit {
   }
 
   postAddCar() {
-    console.log("ceva");
     this.carRegistrationData = {
-      brand: "asd",
-      model: "asd",
-      licensePlate: "asd",
-      year: 0,
-      available:0,
+      brand: this.brand,
+      model: this.model,
+      licensePlate: this.licensePlate,
+      year: this.year,
+      available: this.available,
     };
 
     this.auth.postAddCar(this.carRegistrationData)

@@ -6,23 +6,23 @@
 
     <mat-card-content>
       <mat-form-field class="full-width-input">
-        <input matInput placeholder="Brand" required>
+        <input matInput placeholder="Brand" (keyup)="setBrand($event)" required>
       </mat-form-field><br>
 
       <mat-form-field class="full-width-input">
-        <input matInput placeholder="Model" required>
+        <input matInput placeholder="Model"  (keyup)="setModel($event)" required>
       </mat-form-field><br>
 
       <mat-form-field class="full-width-input">
-        <input matInput placeholder="License plate" required>
+        <input matInput placeholder="License plate" (keyup)="setLicensePlate($event)" required>
       </mat-form-field><br>
 
       <mat-form-field class="full-width-input">
-        <input matInput placeholder="Year" required>
+        <input matInput placeholder="Year" (keyup)="setYear($event)" required>
       </mat-form-field><br>
 
       <mat-form-field class="full-width-input">
-        <input matInput placeholder="Available seats" required>
+        <input matInput placeholder="Available seats" (keyup)="setAvailableSeats($event)" required>
       </mat-form-field><br>
 
       <div class="center">
