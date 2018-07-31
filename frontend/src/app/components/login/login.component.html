@@ -1,0 +1,25 @@
+ <div class="login-container vertical-horizontal-center">
+    <mat-card>
+      <mat-card-title>
+        Login
+      </mat-card-title>
+      <mat-card-content>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="User" (keyup)="setName($event)" required>
+          </mat-form-field><br>
+
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Password" (keyup)="setPassword($event)" required>
+          </mat-form-field>
+
+          <div class="center">
+            <button mat-raised-button button (click)="postLogin()" class="center" color="primary">
+              <mat-icon>cached</mat-icon>
+                Login
+            </button>
+          </div>
+
+          <p>Don't have an account? <a [routerLink]="['/register']" class="no-text-decoration">Sign up</a></p>
+      </mat-card-content>
+    </mat-card>
+  </div>

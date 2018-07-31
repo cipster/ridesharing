@@ -1,9 +1,10 @@
-
+<div class="register-container vertical-horizontal-center">
   <mat-card>
+    <mat-card-title>
+      Register
+    </mat-card-title>
+
     <mat-card-content>
-
-        <p>Please login to continue</p>
-
         <mat-form-field class="full-width-input">
           <input matInput placeholder="User" (keyup)="setUsername($event)" required>
         </mat-form-field><br>
@@ -28,10 +29,15 @@
           <input matInput  type = "number" placeholder="Phone" (keyup)="setPhone($event)"  required>
         </mat-form-field><br>
 
-        <button mat-raised-button color="primary" (click)="postRegister()" >Register</button>
-
+        <div class="center">
+          <button mat-raised-button color="primary" (click)="postRegister()" >
+            <mat-icon>cached</mat-icon>
+            Register
+          </button>
+        </div>
     </mat-card-content>
   </mat-card>
+</div>
 
 
 

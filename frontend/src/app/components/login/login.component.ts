@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../services/auth.service";
-import { UserRegistrationData } from "../interfaces/user-registration-data";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {UserRegistrationData} from "../../interfaces/user-registration-data";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit {
   password : string = "";
   userRegistrationData: UserRegistrationData;
 
-  constructor(private AuthService: AuthService) {
-
-  }
+  constructor(private AuthService: AuthService) { }
 
   ngOnInit() {
   }

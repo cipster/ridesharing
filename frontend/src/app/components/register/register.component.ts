@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import { UserRegistrationData } from "../interfaces/user-registration-data";
+import {AuthService} from "../../services/auth.service";
+import { UserRegistrationData } from "../../interfaces/user-registration-data";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 
 
