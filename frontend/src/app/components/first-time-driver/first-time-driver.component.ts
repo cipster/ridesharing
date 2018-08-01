@@ -11,19 +11,24 @@ import {a} from "@angular/core/src/render3";
 })
 export class FirstTimeDriverComponent implements OnInit {
 
-  private brand:String;
-  private model:String;
-  private licensePlate:String;
-  private year:number;
-  private available:number;
+  private brand : string;
+  private model : string;
+  private licensePlate : string;
+  private year : number;
+  private available : number;
+  private carRegistrationData : CarRegistrationData;
 
 
   setBrand(event:any){
+
     this.brand= event.target.value;
+
   }
 
   setModel(event:any){
+
     this.model = event.target.value;
+
   }
 
   setLicensePlate(event:any){
