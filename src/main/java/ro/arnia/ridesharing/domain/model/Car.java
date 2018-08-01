@@ -2,11 +2,13 @@ package ro.arnia.ridesharing.domain.model;
 
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.lang.annotation.Annotation;
 
-@Validated
-public class Car extends BaseEntity{
+@Valid
+public class Car extends BaseEntity implements Annotation {
 
     @NotNull
     @Size( min = 2, max = 100, message = "Size 2<X<10")
@@ -15,7 +17,6 @@ public class Car extends BaseEntity{
     @NotNull
     @Size( min = 1, max = 100)
     private String model;
-
 
     @NotNull
     @Size( min = 7, max = 100)
@@ -70,6 +71,8 @@ public class Car extends BaseEntity{
     }
 
 
-
-
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
 }

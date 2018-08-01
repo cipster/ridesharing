@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import ro.arnia.ridesharing.domain.model.Person;
 
+import javax.validation.Valid;
+
 @RepositoryRestResource
-public interface PersonRepository extends MongoRepository<Person, String> {
+public interface PersonRepository extends MongoRepository<@Valid Person, String> {
 
     List<Person> findByUserName(@Param("userName") String userName);
 
