@@ -20,6 +20,7 @@ public class FailureHandler implements AuthenticationFailureHandler {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         JSONObject jsonResponse = new JSONObject();
+
         try {
             jsonResponse.put("message", "Invalid Credentials");
         } catch (JSONException e) {

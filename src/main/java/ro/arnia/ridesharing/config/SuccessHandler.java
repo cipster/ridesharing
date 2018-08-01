@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
 import javax.servlet.ServletException;
@@ -27,9 +29,11 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         JSONObject jsonResponse = new JSONObject();
+        String username = ((User)authentication.getPrincipal()).getUsername();
+        Person person = repository.findByUser(username);
 
         try {
-            jsonResponse.put("message","Success" );
+            jsonResponse.put("Welcome", username );
         } catch (JSONException e) {
             e.printStackTrace();
         }
