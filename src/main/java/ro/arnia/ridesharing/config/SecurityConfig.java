@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import ro.arnia.ridesharing.service.CustomUserDetailsService;
 
 
@@ -33,6 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
+
+        final TokenAuthenticationFilter tokenFilter = new TokenAuthenticationFilter();
+        http.addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+
+        //Creating token when basic authentication is successful and the same token can be used to authenticate for further requests
+        final CustomBasicAuthenticationFilter customBasicAuthFilter = new CustomBasicAuthenticationFilter(this.authenticationManager() );
+        http.addFilter(customBasicAuthFilter);
+
         http.authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
@@ -47,24 +56,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(getPasswordEncoder());
-//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
-                .roles("USER")
-                .and()
-              .withUser("manager")
-               .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
-               .authorities("WRITE_PRIVILEGES", "READ_PRIVILEGES")
-               .roles("MANAGER");
+
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(getPasswordEncoder());
     }
+
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
+//                .roles("USER")
+//                .and()
+//              .withUser("manager")
+//               .password("$2a$04$MzVZSffPhzdSN489CSUFfeEqj85UCT48628k1MVsxANkKIgE17Lu6")
+//               .authorities("WRITE_PRIVILEGES", "READ_PRIVILEGES")
+//               .roles("MANAGER");
+//    }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
