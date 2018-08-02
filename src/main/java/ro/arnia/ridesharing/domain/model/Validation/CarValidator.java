@@ -16,7 +16,7 @@ public class CarValidator implements Validator {
     }
 
 
-    //  FE send String => errors in spring.
+    //  FE send String => error
 
     @Override
     public void validate(Object obj, Errors errors) {

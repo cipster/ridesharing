@@ -9,7 +9,7 @@ import {UserRegistrationData} from "../../interfaces/user-registration-data";
 })
 export class LoginComponent implements OnInit {
 
-  username : string = "";
+  userName : string = "";
   password : string = "";
   userRegistrationData: UserRegistrationData;
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   setName(event:any){
-    this.username = event.target.value;
+    this.userName = event.target.value;
   }
 
   setPassword(event:any){
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   /** Creates a POST request to Spring server. */
   postLogin() {
     this.userRegistrationData = {
-      username: this.username,
+      userName: this.userName,
       password: this.password,
     };
 

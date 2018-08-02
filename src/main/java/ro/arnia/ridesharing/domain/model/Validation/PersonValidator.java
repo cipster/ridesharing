@@ -28,6 +28,7 @@ public class PersonValidator implements Validator {
         Person person = (Person) object;
         List<Person> listPerson;
 
+
         ValidationUtils.rejectIfEmpty(errors, "userName", "person.userName.notNull", "NULL");
         ValidationUtils.rejectIfEmpty(errors, "firstName", "person.firstName.notNull", "NULL");
         ValidationUtils.rejectIfEmpty(errors, "lastName", "person.lastName.notNull", "NULL");
@@ -35,28 +36,29 @@ public class PersonValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "phone", "person.phone.notNull", "NULL");
         ValidationUtils.rejectIfEmpty(errors, "email", "person.email.notNull", "NULL");
 
+        
 
-        //personRepository.deleteAll();
+
 
         if (person.getEmail() != null && person.getPhone() != null && person.getUserName() != null) {
 
 
             listPerson = personRepository.findByUserName(person.getUserName());
             if (listPerson.size() != 0) {
-                errors.rejectValue("userName", "person.userName", "Exists UserName");
+                errors.rejectValue("userName", "person.userName.exist", "Exists UserName");
 
             }
 
 
             listPerson = personRepository.findByEmail(person.getEmail());
             if (listPerson.size() != 0) {
-                errors.rejectValue("email", "person.userName", "Exists Email");
+                errors.rejectValue("email", "person.email.exist", "Exists Email");
 
             }
 
             listPerson = personRepository.findByPhone(person.getPhone());
             if (listPerson.size() != 0) {
-                errors.rejectValue("phone", "person.userName", "Exists Phone");
+                errors.rejectValue("phone", "person.phone.exist", "Exists Phone");
 
             }
 

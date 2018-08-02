@@ -11,7 +11,7 @@ import { UserRegistrationData } from "../../interfaces/user-registration-data";
 
 export class RegisterComponent implements OnInit{
 
-  username : string = "";
+  userName : string = "";
   firstName: string = "";
   lastName: string = "";
   password: string = "";
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit{
   ngOnInit() { }
 
   setUsername(event: any): void{
-    this.username = event.target.value;
+    this.userName = event.target.value;
   }
 
   setPassword(event: any): void{
@@ -52,13 +52,13 @@ export class RegisterComponent implements OnInit{
   postRegister() {
 
     this.userRegistrationData = {
-      username: this.username,
+      userName: this.userName,
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       phone: this.phone,
-    }
+    };
 
     this.AuthService.postRegister(this.userRegistrationData)
   }
