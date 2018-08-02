@@ -11,16 +11,19 @@ import {RegisterComponent} from './components/register/register.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MaterialModule} from './shared/material/material.module'
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RoutingModule} from "../routing/routing.module"
 import {FlexLayoutModule} from "@angular/flex-layout";
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { AddNewCarComponent } from './components/add-new-car/add-new-car.component';
-import { MapComponent } from './components/map/map.component';
-import{ AgmCoreModule } from "@agm/core";
-import{ AgmDirectionModule } from "agm-direction";
+import {MainPageComponent} from './components/main-page/main-page.component';
+import {AddNewCarComponent} from './components/add-new-car/add-new-car.component';
+import {MapComponent} from './components/map/map.component';
+import {AgmCoreModule} from "@agm/core";
+import {AgmDirectionModule} from "agm-direction";
 import {AppStoreModule} from "./store/app-store.modules";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthInterceptor} from "./auth.interceptor";
+import {AuthService} from "./services/auth.service";
+
 
 @NgModule({
   declarations: [
@@ -56,7 +59,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

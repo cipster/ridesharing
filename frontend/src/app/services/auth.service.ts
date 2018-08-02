@@ -79,4 +79,8 @@ export class AuthService {
     return this.store.select(AuthSelectors.token);
   }
 
+  public logOut(){
+    // TODO: Implement Logout method
+  }
+
 }
