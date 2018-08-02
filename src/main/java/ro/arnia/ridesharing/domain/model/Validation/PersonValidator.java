@@ -36,7 +36,7 @@ public class PersonValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "phone", "person.phone.notNull", "NULL");
         ValidationUtils.rejectIfEmpty(errors, "email", "person.email.notNull", "NULL");
 
-        
+
 
 
 
