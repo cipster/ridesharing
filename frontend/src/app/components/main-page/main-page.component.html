@@ -8,4 +8,14 @@
     <button mat-raised-button button class="role-choice-button" color="primary">
         Passenger
     </button>
+
+    <div>
+      here is token
+      {{authService.getTokenFromStore$()|async}}
+    </div>
+
+    <div>
+      here is token again:
+      {{token}}
+    </div>
 </div>

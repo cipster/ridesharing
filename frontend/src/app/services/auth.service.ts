@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { UserRegistrationData } from "../interfaces/user-registration-data";
+import {AppState} from "../store/interfaces/app.state";
+import {Store} from "@ngrx/store";
+import * as AuthActions from '../store/actions/auth.actions'
+import * as AuthSelectors from '../store/selectors/auth.selectors'
+import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +14,8 @@ import { UserRegistrationData } from "../interfaces/user-registration-data";
 /** Service with Authentication methods. */
 export class AuthService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private store: Store<AppState>) { }
 
   /**
    * Represents a function which creates a POST request to
@@ -51,17 +57,26 @@ export class AuthService {
   postLogin(userRegistrationData: UserRegistrationData) {
     this.httpClient.post("http://localhost:8080/loginServer", {
         username: userRegistrationData.username,
-        password: userRegistrationData.password,
+        password: userRegistrationData.password
       }
     ).subscribe(
       (data:any []) => {
-        console.log(data)
+        console.log(data);
+        this.store.dispatch(new AuthActions.UpdateTokenAction('newToken'));
+        this.store.dispatch(new AuthActions.UpdateUserAction({
+          username: 'sasha',
+          email: 'sasha@sasa.com'
+        }));
       }
     );
 
     /**
      * TODO: In caz de eroare catch, afisare eroare
      */
+  }
+
+  public getTokenFromStore$(): Observable<string> {
+    return this.store.select(AuthSelectors.token);
   }
 
 }

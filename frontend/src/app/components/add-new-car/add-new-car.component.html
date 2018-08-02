@@ -1,0 +1,77 @@
+<div class="first-time-driver-container vertical-horizontal-center">
+  <mat-card>
+    <mat-card-title>
+      Add a new car
+    </mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="addNewCarFormData" novalidate>
+        <mat-form-field class="width-300">
+          <mat-label>Brand</mat-label>
+          <input formControlName="brand" matInput required>
+          <mat-hint *ngIf="addNewCarFormData.controls.brand.invalid
+              && addNewCarFormData.controls.brand.touched" class="color-red">
+            Brand field is required
+          </mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field class="width-300">
+          <mat-label>Model</mat-label>
+          <input formControlName="model" matInput required>
+          <mat-hint *ngIf="addNewCarFormData.controls.model.invalid
+              && addNewCarFormData.controls.model.touched" class="color-red">
+            Model field is required
+          </mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field class="width-300">
+          <mat-label>License Plate</mat-label>
+          <input formControlName="licensePlate" matInput required>
+          <mat-hint *ngIf="addNewCarFormData.controls.licensePlate.invalid
+              && addNewCarFormData.controls.licensePlate.touched" class="color-red">
+            License Plate field is required
+          </mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field class="width-300">
+          <mat-label>Year</mat-label>
+          <input formControlName="year" type="number" matInput required>
+          <mat-hint *ngIf="addNewCarFormData.controls.year.errors?.required
+              && addNewCarFormData.controls.year.touched" class="color-red">
+            Year field is required
+          </mat-hint>
+          <mat-hint *ngIf="!addNewCarFormData.controls.year.errors?.required
+              && addNewCarFormData.controls.year.touched
+              && addNewCarFormData.controls.year.errors?.min
+              || addNewCarFormData.controls.year.errors?.max" class="color-red">
+            Car year should be between 1990 and {{today | date:'y'}}
+          </mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field class="width-300">
+          <mat-label>Available Seats</mat-label>
+          <input formControlName="availableSeats" type="number" matInput required>
+          <mat-hint *ngIf="addNewCarFormData.controls.availableSeats.errors?.required
+              && addNewCarFormData.controls.availableSeats.touched" class="color-red">
+            Available Seats field is required
+          </mat-hint>
+          <mat-hint *ngIf="!addNewCarFormData.controls.availableSeats.errors?.required
+              && addNewCarFormData.controls.availableSeats.touched
+              && addNewCarFormData.controls.availableSeats.errors?.min" class="color-red">
+            Minimum Available Seats is 1
+          </mat-hint>
+        </mat-form-field><br><br>
+
+        <div class="center">
+          <button [disabled]="!addNewCarFormData.valid" mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            Add car
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {UserRegistrationData} from "../../interfaces/user-registration-data";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -8,32 +8,34 @@ import {UserRegistrationData} from "../../interfaces/user-registration-data";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  username : string = "";
-  password : string = "";
-  userRegistrationData: UserRegistrationData;
+  loginFormGroup: FormGroup;
 
   constructor(private AuthService: AuthService) { }
 
   ngOnInit() {
+    this.initForm()
   }
 
-  setName(event:any){
-    this.username = event.target.value;
+  private initForm(){
+    const username = new FormControl(null, Validators.required);
+    const password = new FormControl(null, Validators.required);
+
+    this.loginFormGroup = new FormGroup({
+      username: username,
+      password: password
+    })
   }
 
-  setPassword(event:any){
-    this.password = event.target.value;
-  }
 
-  /** Creates a POST request to Spring server. */
-  postLogin() {
-    this.userRegistrationData = {
-      username: this.username,
-      password: this.password,
+
+  login(loginFormData){
+    if(this.loginFormGroup.valid){
+      console.log(loginFormData)
+      this.AuthService.postLogin({
+        username: loginFormData.username,
+        password: loginFormData.password
+      });
     }
-
-    this.AuthService.postLogin(this.userRegistrationData);
   }
 
 }

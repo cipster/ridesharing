@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  public token: string = '';
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.getTokenFromStore$().subscribe((token) => {
+      this.token = token;
+    });
   }
+
 
 }

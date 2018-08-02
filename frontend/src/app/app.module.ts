@@ -15,10 +15,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {RoutingModule} from "../routing/routing.module"
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { FirstTimeDriverComponent } from './components/first-time-driver/first-time-driver.component';
+import { AddNewCarComponent } from './components/add-new-car/add-new-car.component';
 import { MapComponent } from './components/map/map.component';
 import{ AgmCoreModule } from "@agm/core";
 import{ AgmDirectionModule } from "agm-direction";
+import {AppStoreModule} from "./store/app-store.modules";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,8 +29,8 @@ import{ AgmDirectionModule } from "agm-direction";
     MainNavComponent,
     RegisterComponent,
     MainPageComponent,
-    FirstTimeDriverComponent,
-    MapComponent,
+    AddNewCarComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,10 @@ import{ AgmDirectionModule } from "agm-direction";
       apiKey: ''
     }),
     AgmDirectionModule,
+    AppStoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

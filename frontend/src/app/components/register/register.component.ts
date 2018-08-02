@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import { UserRegistrationData } from "../../interfaces/user-registration-data";
+import {UserRegistrationData} from "../../interfaces/user-registration-data";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -8,59 +9,56 @@ import { UserRegistrationData } from "../../interfaces/user-registration-data";
   styleUrls: ['./register.component.scss']
 })
 
+@NgModule({
+    imports:
+      [FormsModule, ReactiveFormsModule]
+})
 
 export class RegisterComponent implements OnInit{
-
-  username : string = "";
-  firstName: string = "";
-  lastName: string = "";
-  password: string = "";
-  email: string = "";
-  phone: string = "";
+  registrationForm: FormGroup;
 
   constructor( private AuthService: AuthService ) { }
 
-  ngOnInit() { }
-
-  setUsername(event: any): void{
-    this.username = event.target.value;
+  register(registerFormData){
+    if(this.registrationForm.valid) {
+      // TODO: De adaugat metoda CRUD de inregistrare
+      this.AuthService.postRegister({
+        username: registerFormData.username,
+        password: registerFormData.password,
+        firstName: registerFormData.firstName,
+        lastName: registerFormData.lastName,
+        email: registerFormData.email,
+        phone: registerFormData.phone
+      } as UserRegistrationData)
+    }
   }
 
-  setPassword(event: any): void{
-    this.password = event.target.value;
+  private initForm() {
+    const username = new FormControl(null, Validators.required)
+    const password = new FormControl(null, [Validators.required, ,
+      Validators.pattern('(.*[0-9].*[~@#$^()_+={}|,.?: -$)(?!.*[<>";`%].*|.*[~@#$^()_+={}|,.?: -$)(?!.*[<>";`%].*[0-9].*)'),
+      Validators.minLength(8)])
+    const firstName = new FormControl(null, Validators.required)
+    const lastName = new FormControl(null, Validators.required)
+    const email = new FormControl(null, [Validators.required, Validators.email])
+    const phone = new FormControl(null, Validators.required)
+
+    this.registrationForm = new FormGroup(
+      {
+        username: username,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone
+      })
   }
 
-  setFirstName(event: any): void{
-    this.firstName = event.target.value;
+  ngOnInit() {
+    this.initForm();
   }
 
-  setLastName(event: any): void{
-    this.lastName = event.target.value;
-  }
 
-  setEmail(event: any): void{
-    this.email = event.target.value;
-  }
-
-  setPhone(event: any): void{
-    this.phone = event.target.value;
-  }
-
-  userRegistrationData: UserRegistrationData;
 
   /** Creates a POST request to Spring server. */
-  postRegister() {
-
-    this.userRegistrationData = {
-      username: this.username,
-      password: this.password,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      phone: this.phone,
-    }
-
-    this.AuthService.postRegister(this.userRegistrationData)
-  }
-
 }

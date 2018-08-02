@@ -5,36 +5,79 @@
     </mat-card-title>
 
     <mat-card-content>
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="User" (keyup)="setUsername($event)" required>
-        </mat-form-field><br>
+        <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)" autocomplete="off" novalidate>
+          <mat-form-field class="width-300">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" name="username">
+            <mat-hint *ngIf="registrationForm.controls.username.invalid
+              && registrationForm.controls.username.touched" class="color-red">
+              Username field is required
+            </mat-hint>
+          </mat-form-field><br>
 
-        <mat-form-field class="full-width-input">
-          <input matInput  placeholder="First Name" (keyup)="setFirstName($event)"  required>
-        </mat-form-field><br>
+          <mat-form-field class="width-300">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" name="firstName" class="form-control">
+            <mat-hint *ngIf="registrationForm.controls.firstName.invalid
+              && registrationForm.controls.firstName.touched" class="color-red">
+              First Name field is required
+            </mat-hint>
+          </mat-form-field><br>
 
-        <mat-form-field class="full-width-input">
-          <input matInput  placeholder="Last Name" (keyup)="setLastName($event)"  required>
-        </mat-form-field><br>
+          <mat-form-field class="width-300">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" name="lastName">
+            <mat-hint *ngIf="registrationForm.controls.lastName.invalid
+              && registrationForm.controls.lastName.touched" class="color-red">
+              Last Name field is required
+            </mat-hint>
+          </mat-form-field><br>
 
-        <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Password" (keyup)="setPassword($event)"  required>
-        </mat-form-field><br>
+          <mat-form-field class="width-300">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" name="password" type="password">
+            <mat-hint *ngIf="registrationForm.controls.password.errors?.required
+              && registrationForm.controls.password.touched" class="color-red">
+              Password field is required
+            </mat-hint>
+            <mat-hint *ngIf="!registrationForm.controls.password.errors?.required
+              && !registrationForm.controls.password.errors?.minLength
+              && registrationForm.controls.password.touched
+              && registrationForm.controls.password.errors?.pattern" class="color-red">
+              Password should be of minium 8 characters in length, contain a special character and a digit
+            </mat-hint>
+          </mat-form-field><br>
 
-        <mat-form-field class="full-width-input">
-          <input matInput type = "email" placeholder="Email" (keyup)="setEmail($event)"  required>
-        </mat-form-field><br>
+          <mat-form-field class="width-300">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" name="email">
+            <mat-hint *ngIf="registrationForm.controls.email.errors?.required
+              && registrationForm.controls.email.touched" class="color-red">
+              Email field is required
+            </mat-hint>
+            <mat-hint *ngIf="!registrationForm.controls.email.errors?.required
+              && registrationForm.controls.email.touched
+              && registrationForm.controls.email.errors?.email" class="color-red">
+              Please add a valid e-mail
+            </mat-hint>
+          </mat-form-field><br>
 
-        <mat-form-field class="full-width-input">
-          <input matInput  type = "number" placeholder="Phone" (keyup)="setPhone($event)"  required>
-        </mat-form-field><br>
+          <mat-form-field class="width-300">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" name="phone" type="number">
+            <mat-hint *ngIf="registrationForm.controls.phone.invalid
+              && registrationForm.controls.phone.touched" class="color-red">
+              Phone field is required
+            </mat-hint>
+          </mat-form-field><br>
 
-        <div class="center">
-          <button mat-raised-button color="primary" (click)="postRegister()" >
-            <mat-icon>cached</mat-icon>
-            Register
-          </button>
-        </div>
+          <div class="center">
+            <button [disabled]="!registrationForm.valid" mat-raised-button color="primary" type="submit">
+              <mat-icon>cached</mat-icon>
+              Register
+            </button>
+          </div>
+        </form>
     </mat-card-content>
   </mat-card>
 </div>
