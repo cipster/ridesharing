@@ -1,44 +1,54 @@
 package ro.arnia.ridesharing.domain.model.Validation;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
 import ro.arnia.ridesharing.domain.model.Car;
-import ro.arnia.ridesharing.domain.model.repository.CarRepository;
 
 
-@Component
+@Component("beforeCreateCarValidator")
 public class CarValidator implements Validator {
-    private CarRepository carRepository;
 
-    @Autowired
-    public CarValidator(CarRepository carRepo) {
-        this.carRepository = carRepo;
+    @Bean
+    public CarValidator beforeCreateWebsiteUserValidator() {
+        return new CarValidator();
     }
-
 
     @Override
     public boolean supports(Class<?> clazz) {
-        
-        return false;
+        return Car.class.equals(clazz);
     }
+
 
     @Override
     public void validate(Object obj, Errors errors) {
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "brand", "car.brand.required");
+        ValidationUtils.rejectIfEmpty(errors, "brand", "car.brand.notNull","NULL");
+        ValidationUtils.rejectIfEmpty(errors, "model", "car.model.notNull","NULL");
+        ValidationUtils.rejectIfEmpty(errors, "licensePlate", "car.licensePlate.notNull","NULL");
+        ValidationUtils.rejectIfEmpty(errors, "year", "car.year.notNull","NULL");
+        ValidationUtils.rejectIfEmpty(errors, "availableSeats", "car.availableSeats.notNull","NULL");
 
         Car car = (Car) obj;
-        String brand = car.getBrand();
-        if( brand == null || brand.equals(""))
-        {
-            errors.rejectValue("brand", "not is", new Object[]{"'brand'"}, "id can't be negative");
+        if (car.getYear() <= 0) {
+            errors.rejectValue("year", "car.year", "greater than 0");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "role", "role.required");
+        if (car.getAvailableSeats() <= 0) {
+            errors.rejectValue("availableSeats", "car.availableSeats", "greater than 0");
+        }
+
+        String model = car.getModel();
+        if ( model != null && (model.length() < 2  || model.length() > 100)) {
+            errors.rejectValue("model", "car.model", "greater than 2 and smaller than 100");
+        }
+
+        String brand = car.getBrand();
+        if ( model != null && (brand.length() < 2  || brand.length() > 100)) {
+            errors.rejectValue("brand", "car.brand", "greater than 2 and smaller than 100");
+        }
+
     }
+
 }

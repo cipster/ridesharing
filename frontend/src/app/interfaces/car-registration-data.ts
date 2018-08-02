@@ -3,6 +3,6 @@ export class CarRegistrationData {
   model:string ;
   licensePlate:string ;
   year:number;
-  available:number ;
+  availableSeats:number ;
 
 }

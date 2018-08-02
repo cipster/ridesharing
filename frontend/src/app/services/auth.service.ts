@@ -63,7 +63,7 @@ export class AuthService {
         model: carRegistrationData.model,
         licensePlate: carRegistrationData.licensePlate,
         year: carRegistrationData.year,
-        available: carRegistrationData.available,
+        availableSeats: carRegistrationData.availableSeats,
 
       }
     ).subscribe(

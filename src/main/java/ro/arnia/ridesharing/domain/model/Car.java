@@ -1,5 +1,7 @@
 package ro.arnia.ridesharing.domain.model;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -7,28 +9,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.lang.annotation.Annotation;
 
-@Valid
+
 public class Car extends BaseEntity implements Annotation {
 
-    @NotNull
-    @Size( min = 2, max = 100, message = "Size 2<X<10")
+
     private String brand;
-
-    @NotNull
-    @Size( min = 1, max = 100)
     private String model;
-
-    @NotNull
-    @Size( min = 7, max = 100)
     private String licensePlate;
-
-    @NotNull
-    @Size( min = 4, max = 4)
     private int year;
-
-    @NotNull
-    @Size( min = 1, max = 2)
-    private int available;
+    private int availableSeats;
 
     public String getBrand() {
         return brand;
@@ -62,12 +51,12 @@ public class Car extends BaseEntity implements Annotation {
         this.year = year;
     }
 
-    public int getAvailable() {
-        return available;
+    public int getAvailableSeats() {
+        return availableSeats;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
+    public void setAvailableSeats(int available) {
+        this.availableSeats = available;
     }
 
 

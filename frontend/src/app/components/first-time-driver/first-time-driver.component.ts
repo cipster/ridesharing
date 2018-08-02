@@ -15,7 +15,7 @@ export class FirstTimeDriverComponent implements OnInit {
   private model : string;
   private licensePlate : string;
   private year : number;
-  private available : number;
+  private availableSeats : number;
   private carRegistrationData : CarRegistrationData;
 
 
@@ -40,7 +40,7 @@ export class FirstTimeDriverComponent implements OnInit {
   }
 
   setAvailableSeats(event:any){
-    this.available = event.target.value;
+    this.availableSeats = event.target.value;
   }
 
   constructor(private auth:AuthService) { }
@@ -54,7 +54,7 @@ export class FirstTimeDriverComponent implements OnInit {
       model: this.model,
       licensePlate: this.licensePlate,
       year: this.year,
-      available: this.available,
+      availableSeats: this.availableSeats,
     };
 
     this.auth.postAddCar(this.carRegistrationData)
