@@ -2,19 +2,10 @@ package ro.arnia.ridesharing.domain.model;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-
-import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 //@Document(collection="Persons")
 public class Person extends BaseEntity {
-
-    enum typeUser
-    {
-        DRIVER, PASSENGER;
-    }
 
     private String userName;
     private String firstName;
@@ -67,8 +58,6 @@ public class Person extends BaseEntity {
         this.rideHistory = rideHistory;
     }
 
-
-
     public void addCar() {
 
     }
@@ -80,7 +69,6 @@ public class Person extends BaseEntity {
     public void modifyCar() {
 
     }
-
 
     public String getFirstName() {
 
@@ -103,18 +91,7 @@ public class Person extends BaseEntity {
     }
 
 
-    public String getuserName() {
-
-        return this.userName;
-    }
-
-    public void setuser(String user) {
-
-        this.userName = user;
-    }
-
-
-    public String  getPassword() {
+    public String getPassword() {
 
         return this.password;
     }
@@ -129,23 +106,24 @@ public class Person extends BaseEntity {
         return this.phone;
     }
 
-    public void setPhone(String phone){
+    public void setPhone(String phone) {
 
         this.phone = phone;
     }
 
-    public String getEmail(){
+    public String getEmail() {
 
         return this.email;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
 
         this.email = email;
     }
 
-
-
+    enum typeUser {
+        DRIVER, PASSENGER;
+    }
 
 
 }

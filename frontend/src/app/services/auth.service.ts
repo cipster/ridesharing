@@ -28,7 +28,7 @@ export class AuthService {
     this.httpClient.post("http://localhost:8080/persons", {
         firstName: userRegistrationData.firstName,
         lastName: userRegistrationData.lastName,
-        user: userRegistrationData.username,
+        userName: userRegistrationData.username,
         email: userRegistrationData.email,
         password : userRegistrationData.password,
         phone : userRegistrationData.phone,

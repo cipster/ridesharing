@@ -15,5 +15,7 @@ import javax.validation.Valid;
 public interface PersonRepository extends MongoRepository<Person, String> {
 
     List<Person> findByUserName(@Param("userName") String userName);
+    List<Person> findByEmail(@Param("email") String email);
+    List<Person> findByPhone(@Param("phone") String phone);
 
 }

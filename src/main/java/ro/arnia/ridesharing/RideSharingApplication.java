@@ -7,18 +7,10 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
 import ro.arnia.ridesharing.domain.model.Validation.CarValidator;
 
 @SpringBootApplication
-public class RideSharingApplication extends RepositoryRestConfigurerAdapter {
+public class RideSharingApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(RideSharingApplication.class, args);
-    }
-
-    @Override
-    public void configureValidatingRepositoryEventListener(
-            ValidatingRepositoryEventListener v)
-    {
-        v.addValidator("beforeCreate", new CarValidator());
-
     }
 
 
