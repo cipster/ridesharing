@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Configuration
-//@EnableMongoRepositories
 class ApplicationConfig extends AbstractMongoConfiguration {
 
   @Override
@@ -23,6 +22,6 @@ class ApplicationConfig extends AbstractMongoConfiguration {
 
   @Override
   protected Collection<String> getMappingBasePackages() {
-    return Arrays.asList("ro.arnia.ridesharing.domain.model.repository");
+    return Arrays.asList("ro.arnia.ridesharing.domain.model.personRepository");
   }
 }

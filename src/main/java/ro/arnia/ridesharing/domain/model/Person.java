@@ -57,17 +57,13 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
-
-    public String getuser() {
-
-        return this.user;
+    public String getUser() {
+        return user;
     }
 
-    public void setuser(String user) {
-
+    public void setUser(String user) {
         this.user = user;
     }
-
 
     public String  getPassword() {
 
