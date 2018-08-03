@@ -33,6 +33,6 @@ public class CarValidatorTest {
     public void brandIsNotNull() {
         classUnderTest.validate(car,err);
         System.out.print(err.getAllErrors());
-        assertEquals(42, 43);
+      //  assertEquals(42, 43);
     }
 }

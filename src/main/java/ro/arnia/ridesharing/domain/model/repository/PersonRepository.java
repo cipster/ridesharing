@@ -2,6 +2,7 @@ package ro.arnia.ridesharing.domain.model.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +15,8 @@ import javax.validation.Valid;
 @RepositoryRestResource
 public interface PersonRepository extends MongoRepository<Person, String> {
 
-    List<Person> findByUserName(@Param("userName") String userName);
-    List<Person> findByEmail(@Param("email") String email);
-    List<Person> findByPhone(@Param("phone") String phone);
+    Optional<Person> findByUserName(@Param("userName") String userName);
+    Optional<Person> findByEmail(@Param("email") String email);
+    Optional<Person> findByPhone(@Param("phone") String phone);
 
 }

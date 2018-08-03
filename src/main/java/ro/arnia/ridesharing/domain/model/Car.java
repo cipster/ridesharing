@@ -47,5 +47,5 @@ public class Car extends BaseEntity {
     public void setAvailableSeats(int available) {
         this.availableSeats = available;
     }
-    
+
 }
