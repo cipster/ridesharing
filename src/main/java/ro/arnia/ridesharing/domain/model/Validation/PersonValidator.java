@@ -1,5 +1,6 @@
 package ro.arnia.ridesharing.domain.model.Validation;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -27,7 +28,7 @@ public class PersonValidator implements Validator {
     public void validate(Object object, Errors errors) {
         Person person = (Person) object;
         List<Person> listPerson;
-
+        boolean valid;
 
         ValidationUtils.rejectIfEmpty(errors, "userName", "person.userName.notNull", "NULL");
         ValidationUtils.rejectIfEmpty(errors, "firstName", "person.firstName.notNull", "NULL");
@@ -37,32 +38,26 @@ public class PersonValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "email", "person.email.notNull", "NULL");
 
 
-
-
+        valid = EmailValidator.getInstance().isValid(person.getEmail());
+        if (!valid)
+            errors.rejectValue("email", "person.email.invalid", "Invalid Email");
 
         if (person.getEmail() != null && person.getPhone() != null && person.getUserName() != null) {
 
-
             listPerson = personRepository.findByUserName(person.getUserName());
-            if (listPerson.size() != 0) {
+            if (listPerson.size() != 0)
                 errors.rejectValue("userName", "person.userName.exist", "Exists UserName");
 
-            }
-
-
             listPerson = personRepository.findByEmail(person.getEmail());
-            if (listPerson.size() != 0) {
+            if (listPerson.size() != 0)
                 errors.rejectValue("email", "person.email.exist", "Exists Email");
 
-            }
-
             listPerson = personRepository.findByPhone(person.getPhone());
-            if (listPerson.size() != 0) {
+            if (listPerson.size() != 0)
                 errors.rejectValue("phone", "person.phone.exist", "Exists Phone");
-
-            }
 
         }
 
     }
+
 }

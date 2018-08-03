@@ -1,15 +1,8 @@
 package ro.arnia.ridesharing.domain.model;
 
-import org.springframework.validation.annotation.Validated;
+public class Car extends BaseEntity {
 
-import javax.validation.constraints.NotBlank;
-import java.lang.annotation.Annotation;
-
-public class Car extends BaseEntity implements Annotation {
-
-    @NotBlank
     private String model;
-    @NotBlank
     private String brand;
     private String licensePlate;
     private Integer year;
@@ -54,10 +47,5 @@ public class Car extends BaseEntity implements Annotation {
     public void setAvailableSeats(int available) {
         this.availableSeats = available;
     }
-
-
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return null;
-    }
+    
 }
