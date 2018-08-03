@@ -9,6 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.validation.Errors;
 import ro.arnia.ridesharing.domain.model.Car;
 
+import static org.junit.Assert.assertEquals;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class CarValidatorTest {
@@ -29,8 +31,8 @@ public class CarValidatorTest {
 
     @Test
     public void brandIsNotNull() {
-
         classUnderTest.validate(car,err);
         System.out.print(err.getAllErrors());
+        assertEquals(42, 43);
     }
 }
