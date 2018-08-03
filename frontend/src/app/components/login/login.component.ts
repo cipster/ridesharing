@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if(this.loginFormGroup.valid){
       console.log(loginFormData)
       this.AuthService.postLogin({
-        username: loginFormData.username,
+        userName: loginFormData.userName,
         password: loginFormData.password
       });
     }

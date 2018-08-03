@@ -29,10 +29,10 @@ export class AuthService {
    */
   postRegister(userRegistrationData: UserRegistrationData) {
 
-    this.httpClient.post("http://localhost:8080/registerServer", {
+    this.httpClient.post("http://localhost:8080/persons", {
         firstName: userRegistrationData.firstName,
         lastName: userRegistrationData.lastName,
-        user: userRegistrationData.username,
+        userName: userRegistrationData.userName,
         email: userRegistrationData.email,
         password : userRegistrationData.password,
         phone : userRegistrationData.phone,
@@ -56,7 +56,7 @@ export class AuthService {
    */
   postLogin(userRegistrationData: UserRegistrationData) {
     this.httpClient.post("http://localhost:8080/loginServer", {
-        username: userRegistrationData.username,
+        username: userRegistrationData.userName,
         password: userRegistrationData.password
       }
     ).subscribe(

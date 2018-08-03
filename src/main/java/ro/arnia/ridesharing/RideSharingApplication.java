@@ -2,27 +2,16 @@ package ro.arnia.ridesharing;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+import ro.arnia.ridesharing.domain.model.Validation.CarValidator;
 
 @SpringBootApplication
-public class RideSharingApplication {
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
-						.allowedHeaders("name", "header2") //What is this for?
-						.allowCredentials(true);
-			}
-		};
-	}
-	public static void main(String[] args) {
-		SpringApplication.run(RideSharingApplication.class, args);
-	}
+public class RideSharingApplication  {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RideSharingApplication.class, args);
+    }
+
+
 }
