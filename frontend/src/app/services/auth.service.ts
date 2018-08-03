@@ -6,6 +6,7 @@ import {Store} from "@ngrx/store";
 import * as AuthActions from '../store/actions/auth.actions'
 import * as AuthSelectors from '../store/selectors/auth.selectors'
 import {Observable} from "rxjs/internal/Observable";
+import {CarRegistrationData} from "../interfaces/car-registration-data";
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,38 @@ export class AuthService {
           username: 'sasha',
           email: 'sasha@sasa.com'
         }));
+      }
+    );
+
+    /**
+     * TODO: In caz de eroare catch, afisare eroare
+     */
+  }
+
+  /**
+   * Represents a function which creates a POST request to
+   * Spring server with following parameters, it triggers when a car register.
+   * @param {string} brand
+   * @param {string} model
+   * @param {string} licensePlate
+   * @param {number} year
+   * @param {number} available
+   *
+   */
+
+  postAddCar(carRegistrationData: CarRegistrationData) {
+
+    this.httpClient.post("http://localhost:8080/cars", {
+        brand: carRegistrationData.brand,
+        model: carRegistrationData.model,
+        licensePlate: carRegistrationData.licensePlate,
+        year: carRegistrationData.year,
+        availableSeats: carRegistrationData.availableSeats,
+
+      }
+    ).subscribe(
+      (data:any []) => {
+        console.log(data)
       }
     );
 

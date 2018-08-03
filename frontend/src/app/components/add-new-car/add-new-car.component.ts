@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'add-new-car',
@@ -11,7 +12,7 @@ export class AddNewCarComponent implements OnInit {
   today: number = Date.now();
   addNewCarFormData: FormGroup;
 
-  constructor() { }
+  constructor( private AuthService: AuthService ) { }
 
   private initForm() {
     const brand = new FormControl(null, Validators.required);
@@ -31,6 +32,11 @@ export class AddNewCarComponent implements OnInit {
         availableSeats: availableSeats
       })
   }
+
+  public registerCar(addNewCarFormData) {
+    this.AuthService.postAddCar(addNewCarFormData);
+  }
+
 
   ngOnInit() {
     this.initForm()

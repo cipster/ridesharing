@@ -5,7 +5,7 @@
     </mat-card-title>
 
     <mat-card-content>
-      <form [formGroup]="addNewCarFormData" novalidate>
+      <form [formGroup]="addNewCarFormData" (ngSubmit)="registerCar(addNewCarFormData.value)" novalidate>
         <mat-form-field class="width-300">
           <mat-label>Brand</mat-label>
           <input formControlName="brand" matInput required>

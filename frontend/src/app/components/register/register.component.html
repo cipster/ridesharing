@@ -8,9 +8,9 @@
         <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)" autocomplete="off" novalidate>
           <mat-form-field class="width-300">
             <mat-label>Username</mat-label>
-            <input matInput formControlName="username" name="username">
-            <mat-hint *ngIf="registrationForm.controls.username.invalid
-              && registrationForm.controls.username.touched" class="color-red">
+            <input matInput formControlName="userName" name="userName">
+            <mat-hint *ngIf="registrationForm.controls.userName.invalid
+              && registrationForm.controls.userName.touched" class="color-red">
               Username field is required
             </mat-hint>
           </mat-form-field><br>

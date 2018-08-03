@@ -19,11 +19,11 @@ export class RegisterComponent implements OnInit{
 
   constructor( private AuthService: AuthService ) { }
 
-  register(registerFormData){
+  public register(registerFormData){
     if(this.registrationForm.valid) {
       // TODO: De adaugat metoda CRUD de inregistrare
       this.AuthService.postRegister({
-        username: registerFormData.username,
+        userName: registerFormData.userName,
         password: registerFormData.password,
         firstName: registerFormData.firstName,
         lastName: registerFormData.lastName,
@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit{
   }
 
   private initForm() {
-    const username = new FormControl(null, Validators.required)
+    const userName = new FormControl(null, Validators.required)
     const password = new FormControl(null, [Validators.required, ,
       Validators.pattern('(.*[0-9].*[~@#$^()_+={}|,.?: -$)(?!.*[<>";`%].*|.*[~@#$^()_+={}|,.?: -$)(?!.*[<>";`%].*[0-9].*)'),
       Validators.minLength(8)])
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit{
 
     this.registrationForm = new FormGroup(
       {
-        username: username,
+        userName: userName,
         password: password,
         firstName: firstName,
         lastName: lastName,

@@ -9,7 +9,7 @@ import {
 import {Observable} from "rxjs/internal/Observable";
 import {Injectable} from "@angular/core";
 import {AuthService} from "./services/auth.service";
-import { first, map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import {tap} from "rxjs/operators";
 
 const skipRequests = (request: HttpRequest<any>) => {
