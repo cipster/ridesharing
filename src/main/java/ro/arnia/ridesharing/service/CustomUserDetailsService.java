@@ -12,6 +12,7 @@ import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -26,15 +27,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Person person = personRepository.findByUser(username);
-        if (person == null) {
+        Optional<Person> personOptional = personRepository.findByUsername(username);
+        if (!personOptional.isPresent()) {
             throw new UsernameNotFoundException("User not found");
         }
 
-        GrantedAuthority authority = new SimpleGrantedAuthority(person.getRole());
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(person.getUser(), person.getPassword(), Arrays.asList(authority));
-
-        return userDetails;
+        return personOptional.get();
     }
-
 }

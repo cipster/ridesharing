@@ -2,16 +2,19 @@ package ro.arnia.ridesharing.domain.model;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.Collections;
 
 //@Document(collection="Persons")
-public class Person extends BaseEntity {
+public class Person extends BaseEntity implements UserDetails {
 
     @NotNull(message = "Name cannot be null")
-    private String user;
+    private String username;
 
     @NotNull(message = "Name cannot be null")
     private String firstName;
@@ -20,6 +23,7 @@ public class Person extends BaseEntity {
     private String lastName;
 
     @NotNull(message = "Name cannot be null")
+    @JsonIgnore
     private String password;
 
     @NotNull(message = "Name cannot be null")
@@ -27,14 +31,14 @@ public class Person extends BaseEntity {
 
     @NotNull(message = "Name cannot be null")
     private String email;
-    public String role;
+    private Type role;
 
-    public String getRole() {
+    public Type getRole() {
         return this.role;
     }
 
-    public void setRole(String role) {
-        this.role=role;
+    public void setRole(Type role) {
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -57,15 +61,12 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getUser() {
-        return user;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String  getPassword() {
+    public String getPassword() {
 
         return this.password;
     }
@@ -75,24 +76,57 @@ public class Person extends BaseEntity {
         this.password = password;
     }
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public String getPhone() {
 
         return this.phone;
     }
 
-    public void setPhone(String phone){
+    public void setPhone(String phone) {
 
         this.phone = phone;
     }
 
-    public String getEmail(){
+    public String getEmail() {
 
         return this.email;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
 
         this.email = email;
     }
 
+    private enum Type {
+        DRIVER,
+        PASSENGER
+    }
 }
