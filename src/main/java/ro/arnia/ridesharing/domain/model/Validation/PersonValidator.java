@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 import ro.arnia.ridesharing.domain.model.Person;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonValidator implements Validator {
@@ -27,7 +27,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object object, Errors errors) {
         Person person = (Person) object;
-        List<Person> listPerson;
+        Optional<Person> optPerson;
         boolean valid;
 
         ValidationUtils.rejectIfEmpty(errors, "userName", "person.userName.notNull", "NULL");
@@ -44,17 +44,19 @@ public class PersonValidator implements Validator {
 
         if (person.getEmail() != null && person.getPhone() != null && person.getUserName() != null) {
 
-            listPerson = personRepository.findByUserName(person.getUserName());
-            if (listPerson.size() != 0)
-                errors.rejectValue("userName", "person.userName.exist", "Exists UserName");
+            optPerson = personRepository.findByUserName(person.getUserName());
 
-            listPerson = personRepository.findByEmail(person.getEmail());
-            if (listPerson.size() != 0)
-                errors.rejectValue("email", "person.email.exist", "Exists Email");
 
-            listPerson = personRepository.findByPhone(person.getPhone());
-            if (listPerson.size() != 0)
-                errors.rejectValue("phone", "person.phone.exist", "Exists Phone");
+            if (optPerson.isPresent())
+                errors.rejectValue("userName", "person.userName.exist", "Exist UserName");
+
+            optPerson = personRepository.findByEmail(person.getEmail());
+            if (optPerson.isPresent())
+                errors.rejectValue("email", "person.email.exist", "Exist Email");
+
+            optPerson = personRepository.findByPhone(person.getPhone());
+            if (optPerson.isPresent())
+                errors.rejectValue("phone", "person.phone.exist", "Exist Phone");
 
         }
 

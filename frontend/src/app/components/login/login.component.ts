@@ -26,13 +26,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
-
-
   login(loginFormData){
     if(this.loginFormGroup.valid){
       console.log(loginFormData)
       this.AuthService.postLogin({
-        userName: loginFormData.userName,
+        userName: loginFormData.username,
         password: loginFormData.password
       });
     }

@@ -2,6 +2,8 @@ package ro.arnia.ridesharing.domain.model;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.util.Set;
 
 //@Document(collection="Persons")
@@ -21,6 +23,8 @@ public class Person extends BaseEntity {
     public String getUserName() {
         return userName;
     }
+
+    public String getRole() {return "user";}
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -97,12 +101,12 @@ public class Person extends BaseEntity {
     }
 
     public void setPassword(String password) {
-
+        int strength = 4;
+        password = new BCryptPasswordEncoder(strength).encode(password);
         this.password = password;
     }
 
     public String getPhone() {
-
         return this.phone;
     }
 

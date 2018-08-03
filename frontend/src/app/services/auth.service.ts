@@ -55,19 +55,15 @@ export class AuthService {
    * @param {string} user
    * @param {string} password
    */
+
   postLogin(userRegistrationData: UserRegistrationData) {
-    this.httpClient.post("http://localhost:8080/loginServer", {
+    this.httpClient.post("http://localhost:8080/login", {
         username: userRegistrationData.userName,
         password: userRegistrationData.password
       }
     ).subscribe(
       (data:any []) => {
-        console.log(data);
-        this.store.dispatch(new AuthActions.UpdateTokenAction('newToken'));
-        this.store.dispatch(new AuthActions.UpdateUserAction({
-          username: 'sasha',
-          email: 'sasha@sasa.com'
-        }));
+        console.log(data)
       }
     );
 
@@ -95,7 +91,6 @@ export class AuthService {
         licensePlate: carRegistrationData.licensePlate,
         year: carRegistrationData.year,
         availableSeats: carRegistrationData.availableSeats,
-
       }
     ).subscribe(
       (data:any []) => {
