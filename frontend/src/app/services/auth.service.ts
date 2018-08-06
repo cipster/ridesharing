@@ -33,14 +33,13 @@ export class AuthService {
         password : userRegistrationData.password,
         phone : userRegistrationData.phone,
       }
-    ).subscribe(
-      (data:any []) => {
-        console.log(data)
-      }
+    ).toPromise()
+      .then(res=> console.log(res))
+      .catch( msg => console.log(msg.status));
       /**
        * TODO: In caz de eroare catch, afisare eroare
        */
-    );
+
 
   }
 
@@ -66,11 +65,14 @@ export class AuthService {
         availableSeats: carRegistrationData.availableSeats,
 
       }
-    ).subscribe(
+    )
+    .subscribe(
       (data:any []) => {
         console.log(data)
+
       }
-    );
+    )
+      ;
 
     /**
      * TODO: In caz de eroare catch, afisare eroare
