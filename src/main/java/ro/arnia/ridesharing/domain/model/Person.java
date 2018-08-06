@@ -5,6 +5,7 @@ package ro.arnia.ridesharing.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -22,8 +23,8 @@ public class Person extends BaseEntity implements UserDetails {
     @NotNull(message = "Name cannot be null")
     private String lastName;
 
+    //@JsonIgnore
     @NotNull(message = "Name cannot be null")
-    @JsonIgnore
     private String password;
 
     @NotNull(message = "Name cannot be null")
@@ -67,13 +68,12 @@ public class Person extends BaseEntity implements UserDetails {
     }
 
     public String getPassword() {
-
         return this.password;
     }
 
     public void setPassword(String password) {
-
-        this.password = password;
+        int strength = 4;
+        this.password = new BCryptPasswordEncoder(strength).encode(password);
     }
 
     @Override
