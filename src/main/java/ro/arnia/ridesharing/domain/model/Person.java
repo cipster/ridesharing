@@ -2,76 +2,43 @@ package ro.arnia.ridesharing.domain.model;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Set;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.Collections;
 
 //@Document(collection="Persons")
-public class Person extends BaseEntity {
+public class Person extends BaseEntity implements UserDetails {
 
-    private String userName;
+    @NotNull(message = "Name cannot be null")
+    private String username;
+
+    @NotNull(message = "Name cannot be null")
     private String firstName;
+
+    @NotNull(message = "Name cannot be null")
     private String lastName;
+
+    @NotNull(message = "Name cannot be null")
+    @JsonIgnore
     private String password;
+
+    @NotNull(message = "Name cannot be null")
     private String phone;
+
+    @NotNull(message = "Name cannot be null")
     private String email;
-    private typeUser type;
-    private Set<Rating> ratings;
-    private Set<Car> ownedCars;
-    private Set<Ride> rideHistory;
+    private Type role;
 
-    public String getUserName() {
-        return userName;
+    public Type getRole() {
+        return this.role;
     }
 
-    public String getRole() {return "user";}
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public typeUser getType() {
-        return type;
-    }
-
-    public void setType(typeUser type) {
-        this.type = type;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public Set<Car> getOwnedCars() {
-        return ownedCars;
-    }
-
-    public void setOwnedCars(Set<Car> ownedCars) {
-        this.ownedCars = ownedCars;
-    }
-
-    public Set<Ride> getRideHistory() {
-        return rideHistory;
-    }
-
-    public void setRideHistory(Set<Ride> rideHistory) {
-        this.rideHistory = rideHistory;
-    }
-
-    public void addCar() {
-
-    }
-
-    public void removeCar() {
-
-    }
-
-    public void modifyCar() {
-
+    public void setRole(Type role) {
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -94,6 +61,10 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
 
     public String getPassword() {
 
@@ -101,12 +72,41 @@ public class Person extends BaseEntity {
     }
 
     public void setPassword(String password) {
-        int strength = 4;
-        password = new BCryptPasswordEncoder(strength).encode(password);
+
         this.password = password;
     }
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public String getPhone() {
+
         return this.phone;
     }
 
@@ -125,9 +125,8 @@ public class Person extends BaseEntity {
         this.email = email;
     }
 
-    enum typeUser {
-        DRIVER, PASSENGER;
+    private enum Type {
+        DRIVER,
+        PASSENGER
     }
-
-
 }
