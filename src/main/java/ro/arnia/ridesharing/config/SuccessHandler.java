@@ -37,7 +37,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
                 String stringyUser = mapper.writeValueAsString(person);
                 response.getWriter().write(stringyUser);
             } catch (IOException e) {
-                Logger.getAnonymousLogger().info("marea uniune de integrare europeeana");
+                Logger.getAnonymousLogger().info("User not found");
             }
 
         });
