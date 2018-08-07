@@ -4,12 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ro.arnia.ridesharing.domain.model.repository.CarRepository;
+import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
 @RestController
 public class RegisterController {
-    private CarRepository repo;
+    private PersonRepository repo;
 
-    RegisterController(CarRepository carRepository) {
+    RegisterController(PersonRepository carRepository) {
         repo = carRepository;
     }
 

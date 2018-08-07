@@ -5,14 +5,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.security.core.parameters.P;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ro.arnia.ridesharing.domain.model.*;
 import ro.arnia.ridesharing.domain.model.repository.PersonRepository;
 
+import javax.validation.constraints.Null;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
@@ -29,8 +33,14 @@ public class MongoDbSpringIntegrationTest {
         Location startPoint, finishPoint;
         BigDecimal la = new BigDecimal(500);
         BigDecimal lo = new BigDecimal(500);
-        startPoint = new Location(la,lo);
-        finishPoint = new Location(la,lo);
+        startPoint = new Location();
+        finishPoint = new Location();
+
+        startPoint.setLatitude(la);
+        startPoint.setLongitude(lo);
+        finishPoint.setLongitude(lo);
+        finishPoint.setLatitude(la);
+
         listLocation.add(startPoint);
         listLocation.add(finishPoint);
 
@@ -78,13 +88,25 @@ public class MongoDbSpringIntegrationTest {
         person.setOwnedCars(ownedCars);
         person.setRideHistory(rideHistory);
 
+
         personRepository.save(person);
-        
+        Optional<Person>  findPerson =  personRepository.findByUserName("PaiuOvidiu");
 
-        //assertEquals(42, 43);
+        if (!findPerson.isPresent()) {
+            assertEquals(findPerson.get().getUserName(),"");
+        } else {
+            /*assertEquals(findPerson.get().getFirstName(),person.getFirstName());
+            assertEquals(findPerson.get().getLastName(),person.getLastName());
+            assertEquals(findPerson.get().getPhone(),person.getPhone());
+            assertEquals(findPerson.get().getPassword(),person.getPassword());
+            assertEquals(findPerson.get().getEmail(),person.getEmail());
+            assertEquals(findPerson.get().getOwnedCars().size(),1);
+            assertEquals(findPerson.get().getOwnedCars().equals(ownedCars),true);*/
+            assertEquals(findPerson.get(), person);
+        }
 
+        personRepository.delete(person);
 
-        //this.personRepository.save(hhh)
     }
 
 
