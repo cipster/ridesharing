@@ -121,6 +121,7 @@ public class Person extends BaseEntity {
         this.email = email;
     }
 
+
     enum typeUser {
         DRIVER, PASSENGER;
     }
